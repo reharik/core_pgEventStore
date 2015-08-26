@@ -35,7 +35,7 @@ module.exports = function(_options, _logger){
         logger.info('catchUpSubscription | getPastEvents | bulding promise');
         var p = new Promise( function(resolve, reject){
             logger.info('catchUpSubscription | getPastEvents | starting while loop');
-            while (val == true) {0
+            while (val == true) {
                 var statement = 'SELECT * from "events" ORDER BY "Index" OFFSET ' + skipTake.start + ' LIMIT ' + skipTake.count + ';';
                 logger.info(statement);
                 var results = await cnn.client.query(statement);
@@ -52,9 +52,9 @@ module.exports = function(_options, _logger){
                 }
             }
             cnn.done();
+            resolve(true);
         });
         logger.info('catchUpSubscription | getPastEvents | resolving promise');
-        p.resolve(true);
     };
 
     catchUpSubscription.prototype.getCurrentEventsSubscription = function(){
