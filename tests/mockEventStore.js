@@ -3,8 +3,8 @@
  */
 
 var appendToStream =require('./mocks/appendToStreamMock');
-var readStreamEventsForward = require('./mocks/readStreamEventsForward');
-var subscriptionMock = require('./mocks/subscriptionMock');
+var readStreamEventsForward = require('./mocks/readStreamEventsForwardMock');
+var subscriptionMock = require('./mocks/SubscriptionMock');
 
 module.exports = {
     appendToStream:appendToStream,
