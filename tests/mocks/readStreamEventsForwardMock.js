@@ -4,9 +4,11 @@
 
 
 module.exports = function(_options, _logger) {
-var result = [];
-    var readStreamEventForwardShouldReturnResult = function(data){
-        result = data;
+    return function () {
+        var result = [];
+        var readStreamEventForwardShouldReturnResult = function (data) {
+            result = data;
+        };
+        return result;
     };
-    return result;
 };

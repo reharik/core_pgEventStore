@@ -4,5 +4,5 @@
 
 module.exports = function appendToStream(_options, _logger) {
 
-return ['success'];
+return function(){return ['success'];}
 };
