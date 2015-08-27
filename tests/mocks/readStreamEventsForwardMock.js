@@ -10,6 +10,6 @@ module.exports = function(_options, _logger) {
     };
     return function () {
 
-        return result;
+        return _options.result||[];
     };
 };
