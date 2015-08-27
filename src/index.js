@@ -13,7 +13,7 @@ var yowlWrapper = require('yowlwrapper');
 module.exports = function index(_options) {
 
     if(_options.unitTest){
-        return require('./tests/mockEventStore');
+        return require('../tests/mockEventStore');
     }
     var options = {
         "postgres": {

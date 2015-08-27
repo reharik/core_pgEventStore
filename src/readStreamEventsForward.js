@@ -1,16 +1,12 @@
-/**
- * Created by reharik on 6/10/15.
- */
-
 var invariant = require('invariant');
-var pgbluebird = require('pgbluebird');
+var pgbluebird = require('pg-bluebird');
 
 module.exports = function(_options, _logger) {
     var logger = _logger;
     var options = _options;
     var pgb = new pgbluebird();
 
-    return function (streamName, skipTake) {
+    return async function (streamName, skipTake) {
         invariant(
             streamName,
             'must pass a valid stream name'
@@ -30,11 +26,11 @@ module.exports = function(_options, _logger) {
             return [];
         }
 
-        return results.rows.map(x=> {
-                    EventId: x.id,
-                    Type: x.eventName,
-                    Data: x.data,
-                    Metadata: x.metadata
-            });
+        return results.rows.map(x=>{return  {
+            EventId: x.id,
+            Type: x.eventName,
+            Data: x.data,
+            Metadata: x.metadata
+        }});
     };
 };

@@ -3,7 +3,7 @@
  */
 
 var invariant = require('invariant');
-var pgbluebird = require('pgbluebird');
+var pgbluebird = require('pg-bluebird');
 var JSON = require('JSON');
 
 module.exports = function appendToStream(_options, _logger) {
@@ -22,7 +22,7 @@ module.exports = function appendToStream(_options, _logger) {
         );
         logger.trace('appending To Stream');
         var cnn = await pgb.connect(options.postgres.connectionString + options.postgres.database);
-        data.events.forEach(x=>{
+        data.events.forEach(async x=>{
             var statement = 'INSERT INTO "events" ("streamName", "eventName", "metadata", "document") ' +
                 'VALUES (\'' + streamName + '\',\'' + x.eventName + '\' ,\'' + JSON.stringify(x.metadata) + '\',\'' + JSON.stringify(x.data) + '\')';
             logger.info(statement);

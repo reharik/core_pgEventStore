@@ -27,13 +27,12 @@ module.exports = function(_options, _logger){
 
     util.inherits(catchUpSubscription, EventEmitter);
 
-    catchUpSubscription.prototype.getPastEvents = function(skipTake) {
-
+    catchUpSubscription.prototype.getPastEvents = async function(skipTake) {
         var cnn = await pgbluebird.connect(options.postgres.connectionString + options.postgres.database);
         var val = true;
         var _emit = emit;
         logger.info('catchUpSubscription | getPastEvents | bulding promise');
-        var p = new Promise( function(resolve, reject){
+        var p = new Promise( async function(resolve, reject){
             logger.info('catchUpSubscription | getPastEvents | starting while loop');
             while (val == true) {
                 var statement = 'SELECT * from "events" ORDER BY "Index" OFFSET ' + skipTake.start + ' LIMIT ' + skipTake.count + ';';
